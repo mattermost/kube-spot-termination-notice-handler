@@ -1,5 +1,5 @@
 NAME    := mattermost/kube-spot-termination-notice-handler
-TAG     := 1.23.0
+TAG     := v1.23.4
 
 .PHONY: build-image
 build-image:
