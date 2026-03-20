@@ -7,8 +7,8 @@ build-image:
 	docker buildx build \
 	 --platform linux/arm64,linux/amd64 \
 	. -f Dockerfile -t $(NAME):test \
-	--no-cache
-
+	--no-cache \
+	--load
 
 .PHONY: build-image-with-tag
 build-image-with-tag:
