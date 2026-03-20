@@ -1,12 +1,16 @@
 NAME    := mattermost/kube-spot-termination-notice-handler
 TAG     := v1.23.4
 
+# Single arch + --load only (multi-arch manifest cannot be loaded into the daemon).
+# PLATFORM is a Make variable: pass `make build-image PLATFORM=arm64` or set env PLATFORM (exported to Make on CI).
+PLATFORM ?= amd64
+
 .PHONY: build-image
 build-image:
 	@echo Building Mattermost-kube-spot-termination-handler Docker Image
 	docker buildx build \
-	 --platform linux/arm64,linux/amd64 \
-	. -f Dockerfile -t $(NAME):test \
+	 --platform linux/${PLATFORM} \
+	. -f Dockerfile -t $(NAME):test-${PLATFORM} \
 	--no-cache \
 	--load
 
